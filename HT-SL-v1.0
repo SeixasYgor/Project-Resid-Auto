@@ -4,8 +4,6 @@
 
 #define DHTPIN 2      // o sensor dht11 foi conectado ao pino 0
 #define DHTTYPE DHT22
- 
-#define DEBUG
 
 #define Sirene_1 0   //pino de saida para acionamento da Lampada L1
 
@@ -106,7 +104,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
 	String strMSG = String((char*)payload);
 
 	String Topic_Recebido;
-	//#ifdef DEBUG
 	Serial.print("Mensagem chegou do tópico: ");
 	Serial.println(topic);
 	Serial.print("Mensagem:");
@@ -144,18 +141,18 @@ void callback(char* topic, byte* payload, unsigned int length) {
 void reconect() {
   //Enquanto estiver desconectado
   while (!client.connected()) {
-    //#ifdef DEBUG
+    
     Serial.print("Tentando conectar ao servidor MQTT");
-    //#endif
+    
      
     bool conectado = strlen(mqttUser) > 0 ?
                      client.connect("ESP8266Client", mqttUser, mqttPassword) :
                      client.connect("ESP8266Client");
 
     if(conectado) {
-      //#ifdef DEBUG
+    
       Serial.println("Conectado!");
-      //#endif
+    
       //subscreve no tópico
 		client.subscribe(mqttTopicSub_1, 2); //nivel de qualidade: QoS 1
 		client.subscribe(mqttTopicSub_2, 2); //nivel de qualidade: QoS 1
@@ -215,14 +212,13 @@ void enviaDHT(){
   } 
   else 
   {
-    //#ifdef DEBUG
+    
     Serial.print("Umidade: ");
     Serial.print(umidade);
     Serial.print(" \n"); //quebra de linha
     Serial.print("Temperatura: ");
     Serial.print(temperatura);
     Serial.println(" °C");
-    //#endif
  
     sprintf(MsgTemperaturaMQTT,"%f",temperatura);
     client.publish(mqttTopicSub_2, MsgTemperaturaMQTT);
