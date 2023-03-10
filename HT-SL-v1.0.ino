@@ -13,9 +13,9 @@ const char* password =  "0123456789";    		//senha da rede wifi
 
 //informações do broker MQTT - Verifique as informações geradas pelo CloudMQTT
 const char* mqttServer = "m16.cloudmqtt.com";   //server
-const char* mqttUser = "nievfxzt";              //user
-const char* mqttPassword = "yshulRojTBNJ";      //password
-const int mqttPort = 10552;                     //port
+const char* mqttUser = "";              //user
+const char* mqttPassword = "";      //password
+const int mqttPort = ;                     //port
 
 //Informações do equipamento
 const char* ID_Cliente = "Client_001";
